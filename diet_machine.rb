@@ -92,7 +92,7 @@ machine.add_listener do |state|
   unless messages.empty?
     url = 'https://github.com/hitode909/diet_machine/'
     message = "diet_machineで#{ messages.join(', ') }を達成をしました #diet_machine"
-    system "open 'https://twitter.com/share?url=#{URI.escape(url)}&text=#{URI.escape(message)}'"
+    system "open -g 'https://twitter.com/share?url=#{URI.escape(url)}&text=#{URI.escape(message)}'"
   end
 end
 
