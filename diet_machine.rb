@@ -78,11 +78,13 @@ machine.add_listener do |state|
   STDOUT.flush
   messages = []
   if state[:pixel] >= pixel_total
+    pixel_unit *= 2
     pixel_total += pixel_unit
     messages << "#{state[:pixel].to_i}ピクセル"
   end
 
   if state[:types] >= types_total
+    types_unit *= 2
     types_total += types_unit
     messages << "#{state[:types].to_i}タイプ"
   end
