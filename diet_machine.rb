@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'rubygems'
-require 'mac-event-monitor'
+require 'bundler/setup'
 require "uri"
 
 class DietMachine
