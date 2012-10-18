@@ -4,6 +4,8 @@
 ## Usage
 
 ```
+$ gem install bundler
+$ bundle install
 $ ruby diet_machine.rb
 ```
 
