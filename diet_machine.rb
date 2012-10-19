@@ -3,6 +3,8 @@ require 'rubygems'
 require 'bundler/setup'
 require "uri"
 require "mac-event-monitor"
+require "sinatra"
+require "json"
 
 class DietMachine
 
@@ -75,8 +77,6 @@ types_unit = 1000
 pixel_total = pixel_unit
 types_total = types_unit
 machine.add_listener do |state|
-  print '.'
-  STDOUT.flush
   messages = []
   if state[:pixel] >= pixel_total
     pixel_unit *= 2
@@ -97,4 +97,30 @@ machine.add_listener do |state|
   end
 end
 
-machine.run
+
+pipe_read, pipe_write = IO.pipe
+
+$res = ''
+
+get '/' do
+  $res
+end
+
+fork {
+  pipe_write.puts 'hello'
+  $stdout.reopen pipe_write
+  pipe_read.close
+
+  machine.add_listener do |state|
+    pipe_write.puts state.to_json
+  end
+
+  machine.run
+}
+
+Thread.new {
+  pipe_write.close
+  pipe_read.each_line{ |l|
+    $res = l
+  }
+}
