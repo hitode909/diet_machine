@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require "uri"
+require "mac-event-monitor"
 
 class DietMachine
 
